@@ -1,0 +1,22 @@
+live_config_reload = true
+
+[font]
+size = 16
+
+[font.bold]
+family = "MartianMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "MartianMono Nerd Font"
+
+[font.normal]
+family = "MartianMono Nerd Font"
+style = "Regular"
+
+[window]
+opacity = 0.8
+
+[window.padding]
+x = 6
+y = 6
