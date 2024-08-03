@@ -53,6 +53,7 @@ alias gp="git push"
 alias gbm="git branch -m main"
 alias grao="git remote add origin"
 alias gpu="git push -u origin main"
+alias gpf="git push --force"
 
 alias v="nvim"
 
