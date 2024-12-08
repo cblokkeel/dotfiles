@@ -13,7 +13,7 @@ return {
             { section = "startup" },
             {
                 section = "terminal",
-                cmd = "chafa ~/.config/onizuka.jpg --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
+                cmd = "chafa ~/.config/backgrounds/onizuka.jpg --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
                 height = 17,
                 padding = 2,
                 pane = 2
