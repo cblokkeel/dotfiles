@@ -29,3 +29,18 @@ map("n", "<C-s>", function() harpoon:list():select(4) end)
 map("n", "<C-S-P>", function() harpoon:list():prev() end)
 map("n", "<C-S-N>", function() harpoon:list():next() end)
 
+-- Twilight
+map("n", "<leader>tw", ":Twilight<cr>", {})
+
+-- Misc
+function close_all_buffers()
+    local bufs=vim.api.nvim_list_bufs()
+    local current_buf=vim.api.nvim_get_current_buf()
+    for _,i in ipairs(bufs) do
+        if i~=current_buf then
+            vim.api.nvim_buf_delete(i,{})
+        end
+    end
+end
+
+map("n", "<leader>ca", close_all_buffers, {})

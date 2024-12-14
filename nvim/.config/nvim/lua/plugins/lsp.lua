@@ -17,7 +17,25 @@ return {
 			  "williamboman/mason.nvim",
 			},
 		},
-		config = function()
+        opts = {
+            servers = {
+                biome = {
+                    cmd = {"biome", "lsp-proxy"},
+                    filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact", "json", "css", "scss", "markdown" },
+                    root_dir = function(fname)
+                        return require("lspconfig.util").root_pattern(".biome.json", ".git")(fname)
+                    end,
+                    on_attach = function(client, bufnr)
+                          if client.server_capabilities.documentFormattingProvider then
+                            local opts = { noremap = true, silent = true, buffer = bufnr }
+                            vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+                        end
+                    end,
+
+                },
+            }
+        },
+		config = function(_, opts)
 			local lspconfig = require("lspconfig")
 			local mason = require("mason")
 			mason.setup()
@@ -29,7 +47,7 @@ return {
                     plugins = {
                         {
                             name = "@vue/typescript-plugin",
-                            location = "/Users/cblokkeel/Library/pnpm/global/5/node_modules/@vue-typescript-plugin",
+                            location = "/home/colin/.local/share/pnpm/global/5/node_modules/@vue-typescript-plugin",
                             languages = {"javascript", "typescript", "vue"},
                         },
                     },
@@ -45,7 +63,7 @@ return {
                 init_options = {
                     typescript = {
                         -- Warning: may need to change the path
-                        tsdk = '/Users/cblokkeel/Library/pnpm/global/5/node_modules/typescript/lib',
+                        tsdk = '/home/colin/.local/share/pnpm/global/5/node_modules/typescript/lib',
                         vue = {
                             hybridMode = false,
                         }
@@ -66,6 +84,10 @@ return {
                     },
                 }
             };
+
+            for server, server_opts in pairs(opts.servers) do
+                lspconfig[server].setup(server_opts)
+            end
 		end
 	}
 }
