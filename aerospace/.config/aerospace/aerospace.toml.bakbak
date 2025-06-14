@@ -1,0 +1,115 @@
+after-startup-command = ['exec-and-forget sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+]
+
+# Start AeroSpace at login
+start-at-login = false
+
+# Normalizations
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Layouts
+accordion-padding = 300
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Disable macOS "Hide application"
+automatically-unhide-macos-hidden-apps = false
+
+# Floating window rules
+[[on-window-detected]]
+if.app-name-regex-substring = 'telegram'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'finder'
+run = 'layout floating'
+
+[gaps]
+inner.horizontal = 40
+inner.vertical = 40
+outer.left = 40
+outer.bottom = 40
+outer.top = 40
+outer.right = 80
+
+[key-mapping]
+preset = 'qwerty'
+
+# 'main' binding mode declaration
+[mode.main.binding]
+
+alt-ctrl-shift-f = 'fullscreen'
+alt-ctrl-f = 'layout floating'
+
+alt-shift-left = 'join-with left'
+alt-shift-down = 'join-with down'
+alt-shift-up = 'join-with up'
+alt-shift-right = 'join-with right'
+
+# Adjusted layout switching keys
+alt-slash = 'layout tiles horizontal vertical'      # Press 'Alt' + 'Shift' + ':'
+alt-comma = 'layout accordion horizontal vertical'  # Press 'Alt' + ';'
+
+# Focus movement
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Moving windows
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Resizing windows
+alt-shift-minus = 'resize smart -50'  # Press 'Alt' + 'Shift' + ')'
+alt-shift-equal = 'resize smart +50'  # Press 'Alt' + 'Shift' + '='
+
+# Workspace navigation
+'alt-&' = 'workspace 1'
+'alt-é' = 'workspace 2'
+'alt-\' = 'workspace 3'
+'alt-\' = 'workspace 4'
+
+# Moving windows to workspaces
+'alt-shift-&' = 'move-node-to-workspace 1 --focus-follows-window'
+'alt-shift-é' = 'move-node-to-workspace 2 --focus-follows-window'
+'alt-shift-\' = 'move-node-to-workspace 3 --focus-follows-window'
+'alt-shift-\' = 'move-node-to-workspace 4 --focus-follows-window'
+
+alt-tab = 'workspace-back-and-forth'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Mode switching
+alt-shift-semicolon = 'mode service'
+alt-shift-enter = 'mode apps'
+alt-esc = 'mode main'
+
+# Application shortcuts
+alt-t = 'exec-and-forget open -a /Applications/Telegram.app'
+alt-a = 'exec-and-forget open -a /Applications/Arc.app'
+alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
+alt-g = 'exec-and-forget open -a /Applications/Ghostty.app'
+alt-s = 'exec-and-forget open -a /Applications/Safari.app'
+alt-q = 'exec-and-forget open -a /System/Applications/QuickTime Player.app'
+
+# 'service' binding mode
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']
+f = ['layout floating tiling', 'mode main']
+backspace = ['close-all-windows-but-current', 'mode main']
+
+# 'apps' binding mode
+[mode.apps.binding]
+alt-w = ['exec-and-forget open -a /Applications/WezTerm.app', 'mode main']
