@@ -1,4 +1,5 @@
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+ZVM_INIT_MODE=sourcing
 
 if [ ! -d "$ZINIT_HOME" ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
@@ -13,10 +14,9 @@ eval "$(zoxide init zsh)"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
-
-zinit snippet OMZP::git
+zinit light Aloxaf/fzf-tab
+zinit wait lucid light-mode for lukechilds/zsh-nvm
 
 autoload -U compinit && compinit
 zinit cdreplay -q
@@ -46,13 +46,6 @@ zstyle ":fzf-tab:complete:__zoxide_z:*" fzf-preview "ls --color $realpath"
 
 eval "$(fzf --zsh)"
 
-alias cd="z"
-alias vim="nvim"
-alias v="nvim"
-alias ls="eza"
-alias ll="eza -lah"
-alias cat="bat"
-
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+if [ -f "$HOME/.aliases.zsh" ]; then
+    source "$HOME/.aliases.zsh"
+fi
