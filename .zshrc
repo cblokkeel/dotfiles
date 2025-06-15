@@ -1,5 +1,4 @@
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-ZVM_INIT_MODE=sourcing
 
 if [ ! -d "$ZINIT_HOME" ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
@@ -14,8 +13,8 @@ eval "$(zoxide init zsh)"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light jeffreytse/zsh-vi-mode
 zinit light Aloxaf/fzf-tab
+zinit light jeffreytse/zsh-vi-mode
 zinit wait lucid light-mode for lukechilds/zsh-nvm
 
 autoload -U compinit && compinit
