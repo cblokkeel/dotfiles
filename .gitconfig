@@ -1,0 +1,35 @@
+[user]
+	email = cblokkeel1@gmail.com
+	name = cblokkeel
+
+[push]
+	autoSetupRemote = true
+    default = current
+
+[pull]
+	rebase = true
+    default = current
+
+[core]
+    editor = nvim
+    compression = 9
+    whitespace = error
+    preloadindex = true
+
+[url "git@github.com:"]
+	insteadOf = "gh:"
+
+[url "git@github.com:cblokkeel/"]
+    insteadOf = "cb:"
+
+[status]
+    status = true
+    showStash = true
+    showUntrackedFiles = all
+
+[commit]
+    verbose = true
+
+[rebase]
+    autoStash = true
+    missingCommitsCheck = warn
