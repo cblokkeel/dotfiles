@@ -56,6 +56,8 @@ return {
                 automatic_enable = true,
             })
 
+            local pnpm_home = vim.fn.system("pnpm root -g"):gsub("\n", "")
+
             lspconfig.lua_ls.setup {}
 
             lspconfig.ts_ls.setup {
@@ -63,7 +65,7 @@ return {
                     plugins = {
                         {
                             name = "@vue/typescript-plugin",
-                            location = "/home/colin/.local/share/pnpm/global/5/node_modules/@vue-typescript-plugin",
+                            location = pnpm_home .. "/@vue/typescript-plugin",
                             languages = { "javascript", "typescript", "vue" },
                         },
                     },
@@ -78,8 +80,7 @@ return {
             lspconfig.volar.setup {
                 init_options = {
                     typescript = {
-                        -- Warning: may need to change the path
-                        tsdk = '/home/colin/.local/share/pnpm/global/5/node_modules/typescript/lib',
+                        tsdk = pnpm_home .. '/typescript/lib',
                         vue = {
                             hybridMode = false,
                         }
