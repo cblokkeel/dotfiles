@@ -48,3 +48,10 @@ eval "$(fzf --zsh)"
 if [ -f "$HOME/.aliases.zsh" ]; then
     source "$HOME/.aliases.zsh"
 fi
+
+# bun completions
+[ -s "/Users/colin/.bun/_bun" ] && source "/Users/colin/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
