@@ -4,6 +4,7 @@ alias v="nvim"
 alias ls="eza"
 alias ll="eza -lah"
 alias cat="bat"
+alias src="source ~/.zshrc"
 
 alias g="git"
 
@@ -12,6 +13,7 @@ alias gss="git status --short"
 
 alias ga="git add"
 alias gaa="git add -A"
+alias gap="git add --patch"
 
 alias gc="git commit"
 alias gcm="git commit -m"
