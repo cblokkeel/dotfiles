@@ -38,6 +38,7 @@ map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", {})
 map("n", "gd", vim.lsp.buf.definition, {})
 
 map("n", "<leader>r", vim.lsp.buf.rename, {})
+map("n", "<leader>a", vim.lsp.buf.code_action, {})
 
 -- Close quickfix after jumping to a location
 vim.api.nvim_create_autocmd("FileType", {
