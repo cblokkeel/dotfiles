@@ -1,5 +1,6 @@
 require("config/lazy")
 require("config/telescope")
+require("config/floaterminal")
 require("options")
 require("mappings")
 require("config/colors")
