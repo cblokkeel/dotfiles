@@ -17,12 +17,13 @@ alias gap="git add --patch"
 
 alias gc="git commit"
 alias gcm="git commit -m"
-alias gca="git commit -amend"
-alias gcae="git commit -amend --no-edit"
+alias gca="git commit --amend"
+alias gcae="git commit --amend --no-edit"
 
 alias gd="git diff --name-only --relative --diff-filter=d | xargs bat --diff"
 alias gp="git push"
 alias gu="git pull"
+alias gpf="git push --force-with-lease"
 
 alias gi="git init"
 alias gcl="git clone"
