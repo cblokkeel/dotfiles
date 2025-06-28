@@ -52,6 +52,7 @@ return {
                     "vue_ls",
                     "gopls",
                     "dockerls",
+                    "angularls",
                 },
                 automatic_enable = true,
             })
@@ -101,6 +102,8 @@ return {
                     },
                 }
             };
+
+            lspconfig.angularls.setup {}
 
             for server, server_opts in pairs(opts.servers) do
                 lspconfig[server].setup(server_opts)
