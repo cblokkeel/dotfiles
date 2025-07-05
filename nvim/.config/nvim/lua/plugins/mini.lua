@@ -1,3 +1,13 @@
+local open_files_on_current_location = function()
+  local MiniFiles = require("mini.files")
+  local _ = MiniFiles.close()
+    or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+  vim.defer_fn(function()
+    MiniFiles.reveal_cwd()
+  end, 30)
+end
+
+
 return {
     {
         'echasnovski/mini.nvim',
@@ -8,6 +18,9 @@ return {
                     preview = true
                 }
             })
+
+            vim.keymap.set("n", "<C-k>", open_files_on_current_location, {})
+
             require("mini.icons").setup({})
             require("mini.pairs").setup({})
 
