@@ -67,3 +67,9 @@ esac
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# Git
+export PATH=/usr/local/bin:$PATH
