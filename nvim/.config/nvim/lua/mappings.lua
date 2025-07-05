@@ -43,3 +43,16 @@ local function close_all_buffers()
 end
 
 map("n", "<leader>ca", close_all_buffers, {})
+
+-- Copilot
+map("i", "<C-f>", function()
+    return vim.fn['copilot#Accept']('<CR>')
+end, { expr = true, replace_keycodes = false })
+
+map('i', '<C-\\>', '<Plug>(copilot-dismiss)')
+
+-- Ng
+local ng = require("ng");
+map("n", "<leader>at", ng.goto_template_for_component, {})
+map("n", "<leader>ac", ng.goto_component_with_template_file, {})
+
