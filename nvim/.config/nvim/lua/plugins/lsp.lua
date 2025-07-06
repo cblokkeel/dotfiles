@@ -54,7 +54,7 @@ return {
                     "dockerls",
                     "angularls",
                 },
-                automatic_enable = true,
+                automatic_enable = true
             })
 
             local pnpm_home = vim.fn.system("pnpm root -g"):gsub("\n", "")
