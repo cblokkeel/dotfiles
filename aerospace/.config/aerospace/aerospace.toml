@@ -57,6 +57,11 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-name-regex-substring = 'shottr'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'spotify'
+run = 'layout floating'
+
 #
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
