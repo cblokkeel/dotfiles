@@ -5,6 +5,8 @@ if [ ! -d "$ZINIT_HOME" ]; then
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+PATH="/opt/homebrew/bin:$PATH"
+
 source "${ZINIT_HOME}/zinit.zsh"
 
 eval "$(starship init zsh)"
