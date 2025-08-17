@@ -1,5 +1,5 @@
-theme = catppuccin-frappe
-background-opacity = 0.85
+theme = yugen
+macos-titlebar-style = hidden
 window-padding-x = 10
 window-padding-y = 10
 

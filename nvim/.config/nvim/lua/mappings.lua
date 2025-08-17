@@ -7,7 +7,7 @@ map("n", "n", "nzzzv", {})
 map("n", "N", "Nzzzv", {})
 
 -- MiniFiles
-map("n", "<C-n>", ":lua MiniFiles.open()<cr>", {})
+-- map("n", "<C-n>", ":lua MiniFiles.open()<cr>", {})
 map("n", "<C-b>", ":lua MiniFiles.close()<cr>", {})
 
 -- Navigation
@@ -20,10 +20,14 @@ map("n", "<leader>tw", ":Twilight<cr>", {})
 
 -- LSP
 map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", {})
-map("n", "gd", vim.lsp.buf.definition, {})
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function()
+        map("n", "gd", vim.lsp.buf.definition, {})
 
-map("n", "<leader>r", vim.lsp.buf.rename, {})
-map("n", "<leader>a", vim.lsp.buf.code_action, {})
+        map("n", "<leader>r", vim.lsp.buf.rename, {})
+        map("n", "<leader>ca", vim.lsp.buf.code_action, {})
+    end,
+})
 
 -- Close quickfix after jumping to a location
 vim.api.nvim_create_autocmd("FileType", {
@@ -55,4 +59,3 @@ map('i', '<C-\\>', '<Plug>(copilot-dismiss)')
 local ng = require("ng");
 map("n", "<leader>at", ng.goto_template_for_component, {})
 map("n", "<leader>ac", ng.goto_component_with_template_file, {})
-

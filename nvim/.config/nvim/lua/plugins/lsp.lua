@@ -53,8 +53,9 @@ return {
                     "gopls",
                     "dockerls",
                     "angularls",
+                    "svelte",
                 },
-                automatic_enable = true
+                automatic_enable = false
             })
 
             local pnpm_home = vim.fn.system("pnpm root -g"):gsub("\n", "")
@@ -104,6 +105,8 @@ return {
             };
 
             lspconfig.angularls.setup {}
+
+            lspconfig.svelte.setup {}
 
             for server, server_opts in pairs(opts.servers) do
                 lspconfig[server].setup(server_opts)
