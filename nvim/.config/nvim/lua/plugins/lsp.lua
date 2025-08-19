@@ -48,14 +48,15 @@ return {
             mason_lsp_config.setup({
                 ensure_installed = {
                     "lua_ls",
-                    "ts_ls",
                     "vue_ls",
                     "gopls",
                     "dockerls",
                     "angularls",
                     "svelte",
                 },
-                automatic_enable = false
+                automatic_enable = {
+                    exclude = { "ts_ls", "volar" },
+                }
             })
 
             local pnpm_home = vim.fn.system("pnpm root -g"):gsub("\n", "")
