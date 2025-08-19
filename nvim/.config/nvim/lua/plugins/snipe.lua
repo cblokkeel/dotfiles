@@ -1,6 +1,7 @@
 return {
     {
         "leath-dub/snipe.nvim",
+        commit = "2a1b738dfae8502e6162eddfc774da65ed404142",
         keys = {
             {
                 "<leader>sn",
