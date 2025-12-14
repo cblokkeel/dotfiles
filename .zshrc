@@ -75,3 +75,14 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 # Git
 export PATH=/usr/local/bin:$PATH
+
+alias docker="TERM=screen-256color docker"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/colin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/colin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/colin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/colin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/opt/homebrew/opt/helm@3/bin:$PATH"

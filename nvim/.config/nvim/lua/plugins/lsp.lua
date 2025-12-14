@@ -53,6 +53,8 @@ return {
                     "dockerls",
                     "angularls",
                     "svelte",
+                    "terraformls",
+                    "basedpyright"
                 },
                 automatic_enable = {
                     exclude = { "ts_ls", "volar" },
@@ -80,16 +82,16 @@ return {
                 },
             }
 
-            lspconfig.volar.setup {
-                init_options = {
-                    typescript = {
-                        tsdk = pnpm_home .. '/typescript/lib',
-                        vue = {
-                            hybridMode = false,
-                        }
-                    }
-                }
-            }
+            -- lspconfig.volar.setup {
+            --     init_options = {
+            --         typescript = {
+            --             tsdk = pnpm_home .. '/typescript/lib',
+            --             vue = {
+            --                 hybridMode = false,
+            --             }
+            --         }
+            --     }
+            -- }
 
             lspconfig.gopls.setup {}
 

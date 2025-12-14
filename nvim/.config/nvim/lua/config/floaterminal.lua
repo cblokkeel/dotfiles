@@ -2,7 +2,8 @@ local state = {
     floating = {
         buf = -1,
         win = -1,
-    }
+    },
+    first_open = true
 }
 
 local function create_floating_window(opts)
@@ -35,11 +36,15 @@ local function create_floating_window(opts)
     return { buf = buf, win = win }
 end
 
-local toggle_terminal = function()
+local toggle_terminal = function(default_cmd)
     if not vim.api.nvim_win_is_valid(state.floating.win) then
         state.floating = create_floating_window { buf = state.floating.buf }
         if vim.bo[state.floating.buf].buftype ~= "terminal" then
             vim.cmd.terminal()
+            if state.first_open and default_cmd then
+                vim.api.nvim_chan_send(vim.bo[state.floating.buf].channel, default_cmd .. "\n")
+                state.first_open = false
+            end
         end
         vim.cmd.startinsert()
     else
@@ -47,6 +52,16 @@ local toggle_terminal = function()
     end
 end
 
-vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
-vim.keymap.set("n", "<leader>tt", toggle_terminal, {})
+vim.api.nvim_create_user_command("Floaterminal", function(opts)
+    toggle_terminal(opts.args)
+end, { nargs = "?" })
+
+vim.keymap.set("n", "<leader>tt", function()
+    toggle_terminal()
+end, {})
+
+vim.keymap.set("n", "<leader>oc", function()
+    toggle_terminal('opencode')
+end, {})
+
 vim.keymap.set("t", "<esc><esc>", toggle_terminal, {})

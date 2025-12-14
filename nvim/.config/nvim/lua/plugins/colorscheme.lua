@@ -47,9 +47,26 @@ local catppuccin = {
 }
 
 return {
-    -- catppuccin,
-    "bettervim/yugen.nvim",
-    config = function()
-        vim.cmd.colorscheme("yugen")
-    end,
+    {
+        catppuccin
+    },
+    {
+        'bettervim/yugen.nvim',
+    },
+    {
+        'datsfilipe/vesper.nvim'
+    },
+    {
+        "rebelot/kanagawa.nvim",
+        config = function()
+            require("kanagawa").setup({
+                transparent = true,
+                theme = "wave",
+                background = {
+                    dark = "wave",
+                    light = "lotus",
+                }
+            })
+        end
+    }
 }

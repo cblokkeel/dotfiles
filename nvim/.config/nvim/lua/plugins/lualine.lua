@@ -30,6 +30,18 @@ local make = function(components)
     return updated_components
 end
 
+local function unsaved_buffers()
+    local count = 0
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf)
+            and vim.api.nvim_buf_get_option(buf, "modified")
+        then
+            count = count + 1
+        end
+    end
+    return " " .. count -- Icon + count
+end
+
 return {
     "nvim-lualine/lualine.nvim",
     opts = {
@@ -55,7 +67,7 @@ return {
         sections = {
             lualine_a = make({ "mode" }),
             lualine_b = make({ "filename" }),
-            lualine_c = make({}),
+            lualine_c = { unsaved_buffers },
             lualine_x = make({ "diagnostics" }),
             lualine_y = make({ "filetype" }),
             lualine_z = make({ "branch" }),

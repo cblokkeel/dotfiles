@@ -1,6 +1,9 @@
-theme = yugen
+font-family = JetBrains Mono
+theme = Kanagawa Wave
 macos-titlebar-style = hidden
 window-padding-x = 10
 window-padding-y = 10
+background-opacity = 0.9
+background-blur = true
 
 font-size = 14
