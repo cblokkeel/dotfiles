@@ -4,51 +4,24 @@ return {
         dependencies = {
             {
                 "folke/lazydev.nvim",
-                ft = "lua", -- only load on lua files
+                ft = "lua",
                 opts = {
                     library = {
-                        -- See the configuration section for more details
-                        -- Load luvit types when the `vim.uv` word is found
                         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
                     },
                 },
             },
-            {
-                "williamboman/mason.nvim",
-            },
-            {
-                "williamboman/mason-lspconfig.nvim",
-            }
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
+            { "hrsh7th/cmp-nvim-lsp" },
         },
-        opts = {
-            servers = {
-                biome = {
-                    cmd = { "biome", "lsp-proxy" },
-                    filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact", "json", "css", "scss", "markdown" },
-                    root_dir = function(fname)
-                        return require("lspconfig.util").root_pattern(".biome.json", ".git")(fname)
-                    end,
-                    on_attach = function(client, bufnr)
-                        if client.server_capabilities.documentFormattingProvider then
-                            local opts = { noremap = true, silent = true, buffer = bufnr }
-                            vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
-                        end
-                    end,
+        config = function()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-                },
-            }
-        },
-        config = function(_, opts)
-            local lspconfig = require("lspconfig")
-            local mason = require("mason")
-            local mason_lsp_config = require("mason-lspconfig")
-
-            mason.setup()
-
-            mason_lsp_config.setup({
+            require("mason").setup()
+            require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
-                    "vue_ls",
                     "gopls",
                     "dockerls",
                     "angularls",
@@ -56,17 +29,28 @@ return {
                     "terraformls",
                     "basedpyright"
                 },
-                automatic_enable = {
-                    exclude = { "ts_ls", "volar" },
-                }
             })
 
-            local pnpm_home = vim.fn.system("pnpm root -g"):gsub("\n", "")
+            local ok, pnpm_home = pcall(function()
+                return vim.fn.system("pnpm root -g"):gsub("\n", "")
+            end)
+            if not ok or pnpm_home == "" then
+                pnpm_home = nil
+            end
 
-            lspconfig.lua_ls.setup {}
+            local function with_caps(opts)
+                opts = opts or {}
+                opts.capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {})
+                return opts
+            end
 
-            lspconfig.ts_ls.setup {
-                init_options = {
+            vim.lsp.config("lua_ls", with_caps({}))
+
+            local ts_ls_opts = with_caps({
+                filetypes = { "javascript", "typescript", "vue" },
+            })
+            if pnpm_home then
+                ts_ls_opts.init_options = {
                     plugins = {
                         {
                             name = "@vue/typescript-plugin",
@@ -74,28 +58,13 @@ return {
                             languages = { "javascript", "typescript", "vue" },
                         },
                     },
-                },
-                filetypes = {
-                    "javascript",
-                    "typescript",
-                    "vue",
-                },
-            }
+                }
+            end
+            vim.lsp.config("ts_ls", ts_ls_opts)
 
-            -- lspconfig.volar.setup {
-            --     init_options = {
-            --         typescript = {
-            --             tsdk = pnpm_home .. '/typescript/lib',
-            --             vue = {
-            --                 hybridMode = false,
-            --             }
-            --         }
-            --     }
-            -- }
+            vim.lsp.config("gopls", with_caps({}))
 
-            lspconfig.gopls.setup {}
-
-            lspconfig.dockerls.setup {
+            vim.lsp.config("dockerls", with_caps({
                 settings = {
                     docker = {
                         languageserver = {
@@ -105,15 +74,32 @@ return {
                         },
                     },
                 }
-            };
+            }))
 
-            lspconfig.angularls.setup {}
+            vim.lsp.config("angularls", with_caps({}))
+            vim.lsp.config("svelte", with_caps({}))
 
-            lspconfig.svelte.setup {}
+            vim.lsp.config("biome", with_caps({
+                cmd = { "biome", "lsp-proxy" },
+                filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact", "json", "css", "scss", "markdown" },
+                root_markers = { ".biome.json", ".git" },
+                on_attach = function(client, bufnr)
+                    if client.server_capabilities.documentFormattingProvider then
+                        local opts = { noremap = true, silent = true, buffer = bufnr }
+                        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+                    end
+                end,
+            }))
 
-            for server, server_opts in pairs(opts.servers) do
-                lspconfig[server].setup(server_opts)
-            end
-        end
-    }
+            vim.lsp.enable({
+                "lua_ls",
+                "ts_ls",
+                "gopls",
+                "dockerls",
+                "angularls",
+                "svelte",
+                "biome",
+            })
+        end,
+    },
 }

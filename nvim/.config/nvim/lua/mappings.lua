@@ -6,10 +6,6 @@ map("n", "<C-u>", "<C-u>zz", {})
 map("n", "n", "nzzzv", {})
 map("n", "N", "Nzzzv", {})
 
--- MiniFiles
--- map("n", "<C-n>", ":lua MiniFiles.open()<cr>", {})
-map("n", "<C-b>", ":lua MiniFiles.close()<cr>", {})
-
 -- Navigation
 map("n", "<leader>l", ":bnext<cr>zz", {})
 map("n", "<leader>h", ":bprevious<cr>zz", {})
@@ -17,15 +13,13 @@ map("n", "<leader>h", ":bprevious<cr>zz", {})
 -- Twilight
 map("n", "<leader>tw", ":Twilight<cr>", {})
 
-
 -- LSP
 map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", {})
 vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function()
-        map("n", "gd", vim.lsp.buf.definition, {})
-
-        map("n", "<leader>r", vim.lsp.buf.rename, {})
-        map("n", "<leader>ca", vim.lsp.buf.code_action, {})
+    callback = function(args)
+        map("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
+        map("n", "<leader>r", vim.lsp.buf.rename, { buffer = args.buf })
+        map("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = args.buf })
     end,
 })
 
@@ -46,16 +40,9 @@ local function close_all_buffers()
     end
 end
 
-map("n", "<leader>ca", close_all_buffers, {})
-
--- Copilot
-map("i", "<C-f>", function()
-    return vim.fn['copilot#Accept']('<CR>')
-end, { expr = true, replace_keycodes = false })
-
-map('i', '<C-\\>', '<Plug>(copilot-dismiss)')
+map("n", "<leader>bo", close_all_buffers, {})
 
 -- Ng
-local ng = require("ng");
+local ng = require("ng")
 map("n", "<leader>at", ng.goto_template_for_component, {})
 map("n", "<leader>ac", ng.goto_component_with_template_file, {})

@@ -1,0 +1,47 @@
+# Amp Dark Theme for Ghostty
+# Based on the Amp Code website colors
+# https://ampcode.com
+
+# ANSI Colors
+# black
+# palette = 0 = #161616
+# # red
+# palette = 1 = #D9634F
+# # green
+# palette = 2 = #7C9B96
+# # yellow
+# palette = 3 = #E3A25A
+# # blue
+# palette = 4 = #316E99
+# # magenta
+# palette = 5 = #B98BA4
+# # cyan
+# palette = 6 = #5A8F8F
+# # white
+# palette = 7 = #E1E1E1
+#
+# # Bright ANSI Colors
+# # bright black
+# palette = 8 = #627987
+# # bright red
+# palette = 9 = #E7894C
+# # bright green
+# palette = 10 = #B6D7BA
+# # bright yellow
+# palette = 11 = #E3C888
+# # bright blue
+# palette = 12 = #6A9FCC
+# # bright magenta
+# palette = 13 = #D6B4A4
+# # bright cyan
+# palette = 14 = #8FC4C4
+# # bright white
+# palette = 15 = #F2ECDD
+
+# Terminal Colors
+background = #0F0F0F
+foreground = #F2ECDD
+cursor-color = #E7894C
+cursor-text = #0F0F0F
+selection-background = #E7894C
+selection-foreground = #F2ECDD

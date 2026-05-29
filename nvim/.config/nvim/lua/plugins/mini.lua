@@ -24,8 +24,6 @@ return {
             require("mini.icons").setup({})
             require("mini.pairs").setup({})
 
-            require('mini.completion').setup({})
-
             require("mini.sessions").setup({})
 
             require("mini.operators").setup({})

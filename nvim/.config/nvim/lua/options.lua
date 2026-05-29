@@ -26,7 +26,7 @@ vim.wo.signcolumn = 'yes'
 vim.opt.clipboard = 'unnamedplus'
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menuone,noselect,noinsert'
 
 -- Concealer for Neorg
 vim.o.conceallevel = 2
@@ -36,4 +36,4 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4  -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4   -- Number of spaces inserted when indenting
 
-vim.opt.backupcopy = "yes"
+vim.opt.backupcopy = "auto"

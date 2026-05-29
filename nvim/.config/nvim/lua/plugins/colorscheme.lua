@@ -6,20 +6,9 @@ local catppuccin = {
         opts = {
             transparent_background = true,
             integrations = {
-                aerial = true,
-                alpha = true,
                 cmp = true,
-                dashboard = true,
-                flash = true,
-                grug_far = true,
                 gitsigns = true,
-                headlines = true,
-                illuminate = true,
-                indent_blankline = { enabled = true },
-                leap = true,
-                lsp_trouble = true,
                 mason = true,
-                markdown = true,
                 mini = true,
                 native_lsp = {
                     enabled = true,
@@ -30,43 +19,47 @@ local catppuccin = {
                         information = { "undercurl" },
                     },
                 },
-                navic = { enabled = true, custom_bg = "lualine" },
-                neotest = true,
-                neotree = true,
-                noice = true,
-                notify = true,
-                semantic_tokens = true,
                 snacks = true,
                 telescope = true,
                 treesitter = true,
-                treesitter_context = true,
-                which_key = true,
             },
         },
     },
 }
 
 return {
-    {
-        catppuccin
-    },
-    {
-        'bettervim/yugen.nvim',
-    },
-    {
-        'datsfilipe/vesper.nvim'
-    },
+    catppuccin,
+    { 'bettervim/yugen.nvim', lazy = true },
+    { 'datsfilipe/vesper.nvim', lazy = true },
     {
         "rebelot/kanagawa.nvim",
+        lazy = true,
+        opts = {
+            transparent = true,
+            theme = "wave",
+            background = {
+                dark = "wave",
+                light = "lotus",
+            }
+        }
+    },
+    {
+        "cblokkeel/nvim-amp-theme",
+        lazy = true,
+        opts = {
+            variant = "dark",
+            transparent = true,
+            terminal_colors = true,
+        }
+    },
+    {
+        'sainnhe/gruvbox-material',
+        lazy = false,
+        priority = 1000,
         config = function()
-            require("kanagawa").setup({
-                transparent = true,
-                theme = "wave",
-                background = {
-                    dark = "wave",
-                    light = "lotus",
-                }
-            })
+            vim.g.gruvbox_material_enable_italic = true
+            vim.g.gruvbox_material_background = 'hard'
+            vim.g.gruvbox_material_transparent_background = 2
         end
     }
 }

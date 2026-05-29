@@ -27,11 +27,10 @@ local live_multigrep = function(opts)
                 table.insert(args, pieces[2])
             end
 
-            ---@diagnostic disable-next-line: deprecated
-            return vim.tbl_flatten {
+            return vim.iter({
                 args,
                 { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--glob", "!node_modules/" },
-            }
+            }):flatten():totable()
         end,
         entry_maker = make_entry.gen_from_vimgrep(opts),
         cwd = opts.cwd,
@@ -53,7 +52,7 @@ local function unsaved_buffers_picker()
     local results = {}
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         if vim.api.nvim_buf_is_loaded(buf)
-            and vim.api.nvim_buf_get_option(buf, "modified")
+            and vim.bo[buf].modified
         then
             table.insert(results, {
                 buf = buf,

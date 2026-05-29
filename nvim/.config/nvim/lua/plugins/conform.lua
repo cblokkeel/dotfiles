@@ -1,25 +1,24 @@
 return {
     {
         "stevearc/conform.nvim",
-        opts = {},
-        config = function()
-            require("conform").setup({
-                formatters_by_ft = {
-                    lua = { "stylua" },
-                    typescript = { "biome", "prettier" },
-                    vue = { "biome" },
-                    go = { "gofumpt" },
-                    html = { "prettier" },
-                    htmlangular = { "prettier" },
-                    terraform = { "terraformls" }
-                },
-                format_on_save = {
-                    timeout_ms = 1000,
-                    lsp_format = "fallback"
-                },
-            })
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                typescript = { "biome", "prettier" },
+                vue = { "biome" },
+                go = { "gofumpt" },
+                html = { "prettier" },
+                htmlangular = { "prettier" },
+                terraform = { "terraform_fmt" }
+            },
+            -- format_on_save = {
+            --     timeout_ms = 1000,
+            --     lsp_format = "fallback"
+            -- },
+        },
+        config = function(_, opts)
+            require("conform").setup(opts)
 
-            -- Create a command to format the current buffer
             vim.api.nvim_create_user_command("Format", function(args)
                 local range = nil
                 if args.count ~= -1 then
@@ -32,7 +31,6 @@ return {
                 require("conform").format({ async = true, lsp_format = "fallback", range = range })
             end, { range = true })
 
-            -- Create a shortcut to format the current buffer
             vim.keymap.set("n", "<leader>fm", ":Format<CR>", { noremap = true, silent = true })
         end,
     },

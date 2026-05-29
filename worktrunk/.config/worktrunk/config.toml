@@ -1,0 +1,5 @@
+skip-shell-integration-prompt = true
+[pre-start]
+copy = "wt step copy-ignored"
+
+[projects]

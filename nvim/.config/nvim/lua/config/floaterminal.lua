@@ -60,8 +60,8 @@ vim.keymap.set("n", "<leader>tt", function()
     toggle_terminal()
 end, {})
 
-vim.keymap.set("n", "<leader>oc", function()
-    toggle_terminal('opencode')
-end, {})
+-- vim.keymap.set("n", "<leader>oc", function()
+--     toggle_terminal('opencode')
+-- end, {})
 
 vim.keymap.set("t", "<esc><esc>", toggle_terminal, {})
