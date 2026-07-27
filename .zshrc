@@ -9,6 +9,8 @@ PATH="/opt/homebrew/bin:$PATH"
 
 source "${ZINIT_HOME}/zinit.zsh"
 
+eval "$(rbenv init - zsh)"
+
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
@@ -19,7 +21,8 @@ zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 zinit wait lucid light-mode for lukechilds/zsh-nvm
 
-autoload -U compinit && compinit
+autoload -Uz compinit
+compinit -C
 zinit cdreplay -q
 
 HISTSIZE=5000
@@ -59,30 +62,70 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/colin/Library/pnpm"
+# export PNPM_HOME="/Users/colin/Library/pnpm"
+export PNPM_HOME="/Users/colin/.nvm/versions/node/v24.15.0/bin"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
+  *":$PNPM_HOME:") ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+# Load Angular CLI autocompletion (cached once)
+if [[ ! -f ~/.zsh_ng_completion ]] && command -v ng >/dev/null 2>&1; then
+  ng completion script > ~/.zsh_ng_completion 2>/dev/null
+fi
+[[ -f ~/.zsh_ng_completion ]] && source ~/.zsh_ng_completion
 
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+if [[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]]; then
+  eval "$(pyenv init -)"
+fi
+
 # Git
 export PATH=/usr/local/bin:$PATH
 
+alias history="history 1"
 alias docker="TERM=screen-256color docker"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/colin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/colin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [[ -z "$GCLOUD_SDK_INITIALIZED" ]] && [ -f '/Users/colin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
+  . '/Users/colin/Downloads/google-cloud-sdk/path.zsh.inc'
+  export GCLOUD_SDK_INITIALIZED=1
+fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/colin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/colin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [[ -z "$GCLOUD_COMPLETION_INITIALIZED" ]] && [ -f '/Users/colin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
+  . '/Users/colin/Downloads/google-cloud-sdk/completion.zsh.inc'
+  export GCLOUD_COMPLETION_INITIALIZED=1
+fi
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/opt/homebrew/opt/helm@3/bin:$PATH"
+
+export EDITOR=nvim
+
+export PATH="$HOME/.local/bin:$PATH"
+
+if [[ -z "$WT_SHELL_INITIALIZED" ]] && command -v wt >/dev/null 2>&1; then
+  eval "$(command wt config shell init zsh)"
+  export WT_SHELL_INITIALIZED=1
+fi
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+
+# ============ BEGIN coder COMPLETION ============
+_coder_completions() {
+	local -a args completions
+	args=("${words[@]:1:$#words}")
+	completions=(${(f)"$(COMPLETION_MODE=1 "coder" "${args[@]}")"})
+	compadd -a completions
+}
+compdef _coder_completions coder
+# ============ END coder COMPLETION ==============
+
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+

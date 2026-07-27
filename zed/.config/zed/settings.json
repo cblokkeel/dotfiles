@@ -1,0 +1,164 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "cli_default_open_behavior": "existing_window",
+  "ssh_connections": [
+    {
+      "host": "100.70.125.28",
+      "username": "colin",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/colin"
+          ]
+        },
+        {
+          "paths": [
+            "/home/colin/homelab"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "192.168.1.20",
+      "username": "cblokkeel",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/Users/cblokkeel"
+          ]
+        },
+        {
+          "paths": [
+            "/Users/cblokkeel/code"
+          ]
+        },
+        {
+          "paths": [
+            "/Users/cblokkeel/code/yapa"
+          ]
+        }
+      ]
+    },
+    {
+      "host": "100.80.197.72",
+      "username": "cblokkeel",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/Users/cblokkeel/code/blunderlab"
+          ]
+        },
+        {
+          "paths": [
+            "/Users/cblokkeel/code/cblokkeeldotdev"
+          ]
+        }
+      ]
+    }
+  ],
+  "diff_view_style": "unified",
+  "agent_servers": {
+    "codex-acp": {
+      "default_config_options": {
+        "mode": "full-access",
+      },
+      "type": "registry",
+    },
+    "claude-acp": {
+      "default_config_options": {
+        "model": "haiku",
+        "mode": "bypassPermissions",
+      },
+      "type": "registry",
+    },
+    "opencode": {
+      "default_config_options": {
+        "model": "opencode-go/glm-5.2",
+        "mode": "build",
+        "effort": "high",
+      },
+      "favorite_config_option_values": {
+        "effort": ["low"],
+        "model": [
+          "anthropic/claude-opus-4-7",
+          "openai/gpt-5.5",
+          "openai/gpt-5.4",
+          "opencode-go/kimi-k2.6",
+        ],
+      },
+      "type": "registry",
+    },
+  },
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "dock": "right",
+  },
+  "git_panel": {
+    "dock": "right",
+  },
+  "buffer_font_family": ".ZedMono",
+  "agent": {
+    "dock": "left",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1",
+    },
+    "model_parameters": [],
+    "notify_when_agent_waiting": true,
+  },
+  "code_actions_on_format": {
+    "source.fixAll.eslint": true,
+  },
+  "base_keymap": "JetBrains",
+  "vim_mode": true,
+  "ui_font_size": 15,
+  "buffer_font_size": 15,
+  "theme": "orng Dark",
+  "auto_install_extensions": {
+    "angular": true,
+    "catppuccin": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "fleet-themes": true,
+    "git-firefly": true,
+    "github-dark-default": true,
+    "helm": true,
+    "html": true,
+    "jetbrains-new-ui-icons": true,
+    "kanagawa-themes": true,
+    "macos-classic": true,
+    "orng": true,
+    "scss": true,
+    "sql": true,
+    "svelte": true,
+    "tailwind-theme": true,
+    "terraform": true,
+    "toml": true,
+    "vesper": true,
+    "xml": true,
+  },
+  "relative_line_numbers": "enabled",
+  "languages": {
+    "Python": {
+      "format_on_save": "off",
+    },
+  },
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font Mono",
+  },
+}

@@ -1,0 +1,18 @@
+// git internals: syncing these between machines corrupts the repo
+// (stale REBASE_HEAD, phantom unmerged index entries).
+// History travels via the GitHub remote instead.
+.git
+
+// Syncthing's own bookkeeping and conflict debris
+.stfolder
+*.sync-conflict-*
+
+// pi: sync ONLY these four config items. Everything else that lands in
+// that directory is machine-local — credentials (auth.json, .env),
+// installed deps (node_modules), state (sessions, git, bin) — and must
+// not travel between machines. Negations come first: first match wins.
+!pi/.pi/agent/extensions
+!pi/.pi/agent/settings.json
+!pi/.pi/agent/skills
+!pi/.pi/agent/themes
+pi/.pi/agent/*

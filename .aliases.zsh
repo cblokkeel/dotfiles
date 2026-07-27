@@ -42,3 +42,8 @@ alias k="kubectl"
 alias ktx="kubectx"
 alias kgp="kubectl get pods"
 alias kpf="kubectl port-forward"
+
+alias oc="opencode"
+
+alias cc="claude --dangerously-skip-permissions"
+alias ccp="CLAUDE_CONFIG_DIR=$HOME/.claude-personal command claude --dangerously-skip-permissions"

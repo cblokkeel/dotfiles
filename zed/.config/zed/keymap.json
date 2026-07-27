@@ -1,0 +1,74 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle",
+      "ctrl-h": ["workspace::ActivatePaneLeft", "left"],
+      "ctrl-l": ["workspace::ActivatePaneRight", "right"],
+      "ctrl-k": ["workspace::ActivatePaneUp", "up"],
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "context": "Editor && mode == full",
+    "unbind": {
+      "cmd-j": "editor::Hover",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-h": "editor::Backspace",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-l": "editor::ScrollCursorCenter",
+    },
+  },
+  {
+    "context": "vim_mode == literal",
+    "unbind": {
+      "ctrl-l": ["vim::Literal", ["ctrl-l", "\f"]],
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-j": "editor::JoinLines",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-space z": "workspace::ZoomIn",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-space a": "workspace::ZoomOut",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-space d": "git::Diff",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-shift-d": "git::BranchDiff",
+    },
+  },
+]

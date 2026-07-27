@@ -1,0 +1,4 @@
+# node_modules here is a machine-local symlink into ~/.pi/agent, present only
+# so pi's extensions can resolve their imports. Stow must not follow it: it
+# would try to link every dependency file into ~/.pi/agent/node_modules.
+node_modules
