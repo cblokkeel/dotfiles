@@ -6,6 +6,7 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 PATH="/opt/homebrew/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 
 source "${ZINIT_HOME}/zinit.zsh"
 
